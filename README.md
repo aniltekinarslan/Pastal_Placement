@@ -1,6 +1,7 @@
 # Pastal Yerleştirme Programı Kaynak Kodları
 
-# Form Codes: CuttingCSharpNew/Form1.cs
-# Random olarak üretilen ürünleri en az fire ile yerleştirme amacıyla tasarlandı.
+Form Codes: CuttingCSharpNew/Form1.cs
 
-# Çalışma Ekan Görüntüsü: http://prntscr.com/nt3tr1
+Random olarak üretilen ürünleri en az fire ile yerleştirme amacıyla tasarlandı.
+
+Front Ekran Görüntüsü: http://prntscr.com/nt3tr1
