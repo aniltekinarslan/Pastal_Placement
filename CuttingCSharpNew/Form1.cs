@@ -1,0 +1,884 @@
+﻿using CuttingCSharpNew.Classes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CuttingCSharpNew
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        int PRODUCT_COUNT = 0;
+        int PLACE_WIDTH = 500;
+        int PLACE_HEIGHT = 500;
+
+        Random rnd = new Random();
+        List<CProduct> productList = new List<CProduct>();
+
+        Color GetRandomColor()
+        {
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+
+            again:
+            KnownColor randomColorName = names[rnd.Next(names.Length)];
+            var name = randomColorName.ToString().ToLower();
+            if (name.Contains("black") || name.ToLower().Contains("text")
+                || name.ToLower().Contains("desktop")
+                || name.ToLower().Contains("transparent"))
+                goto again;
+
+            return Color.FromKnownColor(randomColorName);
+        }
+
+        void AddProduct(string name, Color c, int width = 0, int height = 0)
+        {
+            int temp = 0;
+            int w1 = Convert.ToInt32(width1.Text);
+            int w2 = Convert.ToInt32(width2.Text);
+            if (w1 > w2)
+            {
+                temp = w1;
+                w1 = w2;
+                w2 = temp;
+            }
+
+            int h1 = Convert.ToInt32(height1.Text);
+            int h2 = Convert.ToInt32(height2.Text);
+
+            if (h1 > h2)
+            {
+                temp = h1;
+                h1 = h2;
+                h2 = temp;
+            }
+
+            int w = (width > 0 ? width : rnd.Next(w1, w2));
+            int h = (height > 0 ? height : rnd.Next(h1, h2));
+
+            productList.Add(new CProduct(name, new SCoord(), new SSize(w, h), c));
+        }
+
+
+        void addProducts1()
+        {
+            AddProduct("7. ürün ", GetRandomColor(), 98, 72);
+            AddProduct("5. ürün ", GetRandomColor(), 86, 79);
+            AddProduct("13. ürün ", GetRandomColor(), 88, 75);
+            AddProduct("11. ürün ", GetRandomColor(), 85, 71);
+            AddProduct("46. ürün ", GetRandomColor(), 91, 66);
+            AddProduct("39. ürün ", GetRandomColor(), 93, 60);
+            AddProduct("28. ürün ", GetRandomColor(), 71, 65);
+            AddProduct("23. ürün ", GetRandomColor(), 89, 51);
+            AddProduct("43. ürün ", GetRandomColor(), 83, 52);
+            AddProduct("26. ürün ", GetRandomColor(), 66, 65);
+            AddProduct("44. ürün ", GetRandomColor(), 68, 60);
+            AddProduct("32. ürün ", GetRandomColor(), 97, 40);
+            AddProduct("6. ürün ", GetRandomColor(), 92, 42);
+            AddProduct("14. ürün ", GetRandomColor(), 57, 56);
+            AddProduct("20. ürün ", GetRandomColor(), 61, 52);
+            AddProduct("35. ürün ", GetRandomColor(), 98, 32);
+            AddProduct("15. ürün ", GetRandomColor(), 49, 59);
+            AddProduct("48. ürün ", GetRandomColor(), 92, 31);
+            AddProduct("29. ürün ", GetRandomColor(), 48, 56);
+            AddProduct("1. ürün ", GetRandomColor(), 85, 30);
+            AddProduct("16. ürün ", GetRandomColor(), 53, 46);
+            AddProduct("25. ürün ", GetRandomColor(), 96, 24);
+            AddProduct("2. ürün ", GetRandomColor(), 64, 36);
+            AddProduct("12. ürün ", GetRandomColor(), 45, 50);
+            AddProduct("22. ürün ", GetRandomColor(), 54, 39);
+            AddProduct("47. ürün ", GetRandomColor(), 96, 21);
+            AddProduct("40. ürün ", GetRandomColor(), 90, 22);
+            AddProduct("8. ürün ", GetRandomColor(), 24, 76);
+            AddProduct("50. ürün ", GetRandomColor(), 80, 22);
+            AddProduct("45. ürün ", GetRandomColor(), 89, 18);
+            AddProduct("21. ürün ", GetRandomColor(), 27, 59);
+            AddProduct("30. ürün ", GetRandomColor(), 44, 36);
+            AddProduct("38. ürün ", GetRandomColor(), 89, 15);
+            AddProduct("18. ürün ", GetRandomColor(), 39, 33);
+            AddProduct("41. ürün ", GetRandomColor(), 53, 24);
+            AddProduct("27. ürün ", GetRandomColor(), 47, 27);
+            AddProduct("9. ürün ", GetRandomColor(), 84, 13);
+            AddProduct("31. ürün ", GetRandomColor(), 23, 45);
+            AddProduct("49. ürün ", GetRandomColor(), 34, 30);
+            AddProduct("36. ürün ", GetRandomColor(), 37, 24);
+            AddProduct("4. ürün ", GetRandomColor(), 73, 11);
+            AddProduct("42. ürün ", GetRandomColor(), 60, 13);
+            AddProduct("37. ürün ", GetRandomColor(), 50, 15);
+            AddProduct("34. ürün ", GetRandomColor(), 57, 12);
+            AddProduct("3. ürün ", GetRandomColor(), 27, 25);
+            AddProduct("10. ürün ", GetRandomColor(), 66, 10);
+            AddProduct("17. ürün ", GetRandomColor(), 49, 10);
+            AddProduct("24. ürün ", GetRandomColor(), 27, 12);
+            AddProduct("33. ürün ", GetRandomColor(), 20, 14);
+            AddProduct("19. ürün ", GetRandomColor(), 18, 15);
+            AddProduct("123. ürün ", GetRandomColor(), 2, 100);
+        }
+        void addProducts2()
+        {
+            AddProduct("7. ürün ", GetRandomColor(), 98, 72);
+            AddProduct("5. ürün ", GetRandomColor(), 86, 79);
+            AddProduct("13. ürün", GetRandomColor(), 88, 75);
+            AddProduct("11. ürün", GetRandomColor(), 85, 71);
+            AddProduct("46. ürün", GetRandomColor(), 91, 66);
+            AddProduct("39. ürün", GetRandomColor(), 93, 60);
+            AddProduct("28. ürün", GetRandomColor(), 71, 65);
+            AddProduct("23. ürün", GetRandomColor(), 89, 51);
+            AddProduct("43. ürün", GetRandomColor(), 83, 52);
+            AddProduct("26. ürün", GetRandomColor(), 66, 65);
+            AddProduct("44. ürün", GetRandomColor(), 68, 60);
+            AddProduct("32. ürün", GetRandomColor(), 97, 40);
+            AddProduct("6. ürün ", GetRandomColor(), 92, 42);
+            AddProduct("14. ürün", GetRandomColor(), 57, 56);
+            AddProduct("20. ürün", GetRandomColor(), 61, 52);
+            AddProduct("35. ürün", GetRandomColor(), 98, 32);
+            AddProduct("15. ürün", GetRandomColor(), 49, 59);
+            AddProduct("48. ürün", GetRandomColor(), 92, 31);
+            AddProduct("29. ürün", GetRandomColor(), 48, 56);
+            AddProduct("1. ürün ", GetRandomColor(), 85, 30);
+            AddProduct("16. ürün", GetRandomColor(), 53, 46);
+        }
+        void addProducts3()
+        {
+            AddProduct("12. ürün", GetRandomColor(), 488, 42);
+            AddProduct(" 7. ürün", GetRandomColor(), 491, 32);
+            AddProduct("37. ürün", GetRandomColor(), 483, 25);
+            AddProduct("26. ürün", GetRandomColor(), 458, 33);
+            AddProduct("22. ürün", GetRandomColor(), 454, 25);
+            AddProduct(" 9. ürün", GetRandomColor(), 432, 42);
+            AddProduct("17. ürün", GetRandomColor(), 447, 13);
+            AddProduct("16. ürün", GetRandomColor(), 411, 24);
+            AddProduct("20. ürün", GetRandomColor(), 412, 17);
+            AddProduct("34. ürün", GetRandomColor(), 393, 34);
+            AddProduct(" 8. ürün", GetRandomColor(), 378, 19);
+            AddProduct(" 2. ürün", GetRandomColor(), 345, 49);
+            AddProduct(" 6. ürün", GetRandomColor(), 377, 12);
+            AddProduct("36. ürün", GetRandomColor(), 334, 48);
+            AddProduct("44. ürün", GetRandomColor(), 346, 28);
+            AddProduct("21. ürün", GetRandomColor(), 342, 20);
+            AddProduct("15. ürün", GetRandomColor(), 17, 334);
+            AddProduct("47. ürün", GetRandomColor(), 307, 30);
+            AddProduct("48. ürün", GetRandomColor(), 15, 271);
+            AddProduct("30. ürün", GetRandomColor(), 30, 255);
+            AddProduct("49. ürün", GetRandomColor(), 13, 263);
+            AddProduct("14. ürün", GetRandomColor(), 12, 217);
+            AddProduct("28. ürün", GetRandomColor(), 31, 173);
+            AddProduct("46. ürün", GetRandomColor(), 12, 90);
+            AddProduct("50. ürün", GetRandomColor(), 11, 82);
+            AddProduct(" 3. ürün", GetRandomColor(), 13, 37);
+        }
+        void addProducts4()
+        {
+            AddProduct("11. ürün", GetRandomColor(), 97, 96);
+            AddProduct("17. ürün", GetRandomColor(), 99, 94);
+            AddProduct("26. ürün", GetRandomColor(), 91, 98);
+            AddProduct("36. ürün", GetRandomColor(), 85, 99);
+            AddProduct("25. ürün", GetRandomColor(), 86, 93);
+            AddProduct("16. ürün", GetRandomColor(), 94, 81);
+            AddProduct("21. ürün", GetRandomColor(), 90, 82);
+            AddProduct("1. ürün", GetRandomColor(), 95, 77);
+            AddProduct("8. ürün", GetRandomColor(), 90, 78);
+            AddProduct("42. ürün", GetRandomColor(), 72, 96);
+            AddProduct("28. ürün", GetRandomColor(), 93, 74);
+            AddProduct("35. ürün", GetRandomColor(), 84, 81);
+            AddProduct("41. ürün", GetRandomColor(), 92, 73);
+            AddProduct("38. ürün", GetRandomColor(), 68, 98);
+            AddProduct("29. ürün", GetRandomColor(), 72, 90);
+            AddProduct("30. ürün", GetRandomColor(), 66, 96);
+            AddProduct("44. ürün", GetRandomColor(), 90, 70);
+            AddProduct("32. ürün", GetRandomColor(), 90, 69);
+            AddProduct("19. ürün", GetRandomColor(), 99, 60);
+            AddProduct("10. ürün", GetRandomColor(), 67, 88);
+            AddProduct("20. ürün", GetRandomColor(), 78, 75);
+            AddProduct("6. ürün", GetRandomColor(), 87, 66);
+            AddProduct("34. ürün", GetRandomColor(), 79, 72);
+            AddProduct("3. ürün", GetRandomColor(), 90, 63);
+            AddProduct("31. ürün", GetRandomColor(), 75, 75);
+            AddProduct("43. ürün", GetRandomColor(), 95, 59);
+            AddProduct("40. ürün", GetRandomColor(), 70, 79);
+            AddProduct("18. ürün", GetRandomColor(), 85, 63);
+            AddProduct("39. ürün", GetRandomColor(), 80, 66);
+            AddProduct("46. ürün", GetRandomColor(), 85, 61);
+        }
+        void addProducts5()
+        {
+            AddProduct("37. ürün", GetRandomColor(), 490, 46);
+            AddProduct("13. ürün", GetRandomColor(), 489, 26);
+            AddProduct("47. ürün", GetRandomColor(), 478, 32);
+            AddProduct("22. ürün", GetRandomColor(), 479, 30);
+            AddProduct("12. ürün", GetRandomColor(), 472, 22);
+            AddProduct(" 4. ürün", GetRandomColor(), 447, 47);
+            AddProduct("46. ürün", GetRandomColor(), 457, 32);
+            AddProduct("46. ürün", GetRandomColor(), 467, 22);
+            AddProduct("31. ürün", GetRandomColor(), 460, 28);
+            AddProduct("27. ürün", GetRandomColor(), 462, 16);
+            AddProduct(" 8. ürün", GetRandomColor(), 446, 28);
+            AddProduct("26. ürün", GetRandomColor(), 420, 48);
+            AddProduct("18. ürün", GetRandomColor(), 438, 29);
+            AddProduct("16. ürün", GetRandomColor(), 420, 44);
+            AddProduct("50. ürün", GetRandomColor(), 416, 47);
+            AddProduct(" 5. ürün", GetRandomColor(), 10, 441);
+            AddProduct(" 2. ürün", GetRandomColor(), 13, 330);
+            AddProduct("33. ürün", GetRandomColor(), 23, 182);
+            AddProduct("32. ürün", GetRandomColor(), 30, 20);
+            AddProduct("47. ürün", GetRandomColor(), 34, 13);
+        }
+        void addProducts6()
+        {
+            AddProduct("341. ürün", GetRandomColor(), 49, 49);
+            AddProduct("202. ürün", GetRandomColor(), 49, 48);
+            AddProduct("328. ürün", GetRandomColor(), 48, 48);
+            AddProduct("334. ürün", GetRandomColor(), 49, 47);
+            AddProduct("352. ürün", GetRandomColor(), 49, 47);
+            AddProduct("457. ürün", GetRandomColor(), 49, 47);
+            AddProduct("134. ürün", GetRandomColor(), 49, 46);
+            AddProduct("  4. ürün", GetRandomColor(), 47, 47);
+            AddProduct(" 79. ürün", GetRandomColor(), 48, 46);
+            AddProduct("197. ürün", GetRandomColor(), 48, 45);
+            AddProduct("156. ürün", GetRandomColor(), 44, 48);
+            AddProduct("456. ürün", GetRandomColor(), 45, 47);
+            AddProduct("436. ürün", GetRandomColor(), 45, 47);
+            AddProduct("473. ürün", GetRandomColor(), 45, 47);
+            AddProduct("267. ürün", GetRandomColor(), 44, 48);
+            AddProduct("350. ürün", GetRandomColor(), 44, 48);
+            AddProduct("329. ürün", GetRandomColor(), 44, 47);
+            AddProduct("231. ürün", GetRandomColor(), 45, 46);
+            AddProduct(" 94. ürün", GetRandomColor(), 45, 45);
+            AddProduct("190. ürün", GetRandomColor(), 43, 47);
+            AddProduct("369. ürün", GetRandomColor(), 41, 49);
+            AddProduct(" 87. ürün", GetRandomColor(), 49, 40);
+            AddProduct("399. ürün", GetRandomColor(), 44, 45);
+            AddProduct("260. ürün", GetRandomColor(), 47, 42);
+            AddProduct("315. ürün", GetRandomColor(), 49, 40);
+            AddProduct("374. ürün", GetRandomColor(), 46, 42);
+            AddProduct("357. ürün", GetRandomColor(), 38, 49);
+            AddProduct("346. ürün", GetRandomColor(), 48, 39);
+            AddProduct(" 78. ürün", GetRandomColor(), 37, 49);
+            AddProduct("138. ürün", GetRandomColor(), 49, 37);
+            AddProduct("206. ürün", GetRandomColor(), 49, 37);
+            AddProduct("255. ürün", GetRandomColor(), 47, 38);
+            AddProduct("191. ürün", GetRandomColor(), 46, 39);
+            AddProduct("103. ürün", GetRandomColor(), 42, 43);
+            AddProduct("317. ürün", GetRandomColor(), 45, 40);
+            AddProduct("172. ürün", GetRandomColor(), 49, 36);
+            AddProduct("247. ürün", GetRandomColor(), 49, 35);
+            AddProduct("425. ürün", GetRandomColor(), 47, 37);
+            AddProduct("481. ürün", GetRandomColor(), 47, 37);
+            AddProduct("183. ürün", GetRandomColor(), 45, 39);
+            AddProduct("471. ürün", GetRandomColor(), 44, 40);
+            AddProduct("229. ürün", GetRandomColor(), 37, 46);
+            AddProduct(" 18. ürün", GetRandomColor(), 41, 42);
+            AddProduct("487. ürün", GetRandomColor(), 48, 35);
+            AddProduct("112. ürün", GetRandomColor(), 34, 48);
+            AddProduct("268. ürün", GetRandomColor(), 48, 34);
+            AddProduct("286. ürün", GetRandomColor(), 39, 43);
+            AddProduct("249. ürün", GetRandomColor(), 44, 38);
+            AddProduct("445. ürün", GetRandomColor(), 45, 37);
+            AddProduct("401. ürün", GetRandomColor(), 35, 47);
+            AddProduct(" 96. ürün", GetRandomColor(), 49, 33);
+            AddProduct("182. ürün", GetRandomColor(), 48, 33);
+            AddProduct("129. ürün", GetRandomColor(), 40, 41);
+            AddProduct("272. ürün", GetRandomColor(), 49, 32);
+            AddProduct("240. ürün", GetRandomColor(), 35, 45);
+            AddProduct("262. ürün", GetRandomColor(), 45, 35);
+            AddProduct("302. ürün", GetRandomColor(), 37, 43);
+            AddProduct("420. ürün", GetRandomColor(), 43, 37);
+            AddProduct("185. ürün", GetRandomColor(), 42, 38);
+            AddProduct("263. ürün", GetRandomColor(), 33, 47);
+            AddProduct("283. ürün", GetRandomColor(), 33, 47);
+            AddProduct("276. ürün", GetRandomColor(), 34, 45);
+            AddProduct("199. ürün", GetRandomColor(), 35, 44);
+            AddProduct("306. ürün", GetRandomColor(), 38, 41);
+            AddProduct("372. ürün", GetRandomColor(), 41, 38);
+            AddProduct("387. ürün", GetRandomColor(), 30, 48);
+            AddProduct("  6. ürün", GetRandomColor(), 31, 47);
+            AddProduct("201. ürün", GetRandomColor(), 32, 46);
+            AddProduct("391. ürün", GetRandomColor(), 34, 44);
+            AddProduct("418. ürün", GetRandomColor(), 35, 43);
+            AddProduct("338. ürün", GetRandomColor(), 39, 39);
+            AddProduct("192. ürün", GetRandomColor(), 36, 42);
+            AddProduct("270. ürün", GetRandomColor(), 31, 47);
+            AddProduct("208. ürün", GetRandomColor(), 29, 49);
+            AddProduct("259. ürün", GetRandomColor(), 28, 49);
+            AddProduct(" 60. ürün", GetRandomColor(), 38, 39);
+            AddProduct(" 34. ürün", GetRandomColor(), 39, 38);
+            AddProduct("193. ürün", GetRandomColor(), 39, 38);
+            AddProduct(" 37. ürün", GetRandomColor(), 45, 32);
+            AddProduct("363. ürün", GetRandomColor(), 30, 47);
+            AddProduct("494. ürün", GetRandomColor(), 31, 45);
+            AddProduct("495. ürün", GetRandomColor(), 33, 43);
+            AddProduct("261. ürün", GetRandomColor(), 36, 40);
+            AddProduct("310. ürün", GetRandomColor(), 38, 38);
+            AddProduct("364. ürün", GetRandomColor(), 38, 38);
+            AddProduct("383. ürün", GetRandomColor(), 28, 48);
+            AddProduct("468. ürün", GetRandomColor(), 27, 49);
+            AddProduct("395. ürün", GetRandomColor(), 26, 49);
+            AddProduct("212. ürün", GetRandomColor(), 28, 47);
+
+
+        }
+        void addProducts7()
+        {
+            AddProduct("380. ürün", GetRandomColor(), 97, 98);
+            AddProduct("241. ürün", GetRandomColor(), 95, 98);
+            AddProduct("345. ürün", GetRandomColor(), 92, 97);
+            AddProduct("410. ürün", GetRandomColor(), 90, 96);
+            AddProduct("  6. ürün", GetRandomColor(), 87, 97);
+            AddProduct("124. ürün", GetRandomColor(), 97, 87);
+            AddProduct(" 29. ürün", GetRandomColor(), 99, 85);
+            AddProduct("233. ürün", GetRandomColor(), 92, 91);
+            AddProduct("360. ürün", GetRandomColor(), 93, 89);
+            AddProduct("329. ürün", GetRandomColor(), 99, 82);
+            AddProduct(" 92. ürün", GetRandomColor(), 91, 89);
+            AddProduct("259. ürün", GetRandomColor(), 91, 89);
+            AddProduct(" 15. ürün", GetRandomColor(), 92, 88);
+            AddProduct(" 28. ürün", GetRandomColor(), 98, 79);
+            AddProduct("279. ürün", GetRandomColor(), 81, 95);
+            AddProduct("104. ürün", GetRandomColor(), 90, 86);
+            AddProduct("255. ürün", GetRandomColor(), 96, 79);
+            AddProduct("436. ürün", GetRandomColor(), 81, 94);
+            AddProduct("115. ürün", GetRandomColor(), 80, 94);
+            AddProduct("220. ürün", GetRandomColor(), 87, 87);
+            AddProduct("322. ürün", GetRandomColor(), 93, 81);
+            AddProduct("351. ürün", GetRandomColor(), 97, 77);
+            AddProduct("480. ürün", GetRandomColor(), 74, 99);
+            AddProduct(" 17. ürün", GetRandomColor(), 90, 83);
+            AddProduct("260. ürün", GetRandomColor(), 89, 84);
+            AddProduct("269. ürün", GetRandomColor(), 83, 90);
+            AddProduct("397. ürün", GetRandomColor(), 86, 86);
+            AddProduct(" 7. ürün", GetRandomColor(), 80, 92);
+            AddProduct("308. ürün", GetRandomColor(), 78, 94);
+            AddProduct("483. ürün", GetRandomColor(), 78, 94);
+            AddProduct("106. ürün", GetRandomColor(), 87, 84);
+            AddProduct("382. ürün", GetRandomColor(), 86, 85);
+            AddProduct("340. ürün", GetRandomColor(), 96, 74);
+            AddProduct("94. ürün", GetRandomColor(), 95, 75);
+            AddProduct("199. ürün", GetRandomColor(), 84, 86);
+            AddProduct("477. ürün", GetRandomColor(), 81, 89);
+            AddProduct("497. ürün", GetRandomColor(), 99, 70);
+            AddProduct("205. ürün", GetRandomColor(), 85, 84);
+            AddProduct("136. ürün", GetRandomColor(), 72, 97);
+            AddProduct("285. ürün", GetRandomColor(), 93, 75);
+            AddProduct("164. ürün", GetRandomColor(), 79, 89);
+            AddProduct("160. ürün", GetRandomColor(), 77, 90);
+            AddProduct("433. ürün", GetRandomColor(), 71, 96);
+            AddProduct("102. ürün", GetRandomColor(), 96, 70);
+            AddProduct("201. ürün", GetRandomColor(), 92, 74);
+            AddProduct(" 1. ürün", GetRandomColor(), 83, 83);
+            AddProduct("82. ürün", GetRandomColor(), 86, 79);
+            AddProduct("65. ürün", GetRandomColor(), 98, 66);
+            AddProduct("207. ürün", GetRandomColor(), 83, 81);
+            AddProduct("97. ürün", GetRandomColor(), 96, 67);
+            AddProduct("229. ürün", GetRandomColor(), 91, 72);
+            AddProduct("487. ürün", GetRandomColor(), 76, 87);
+            AddProduct("178. ürün", GetRandomColor(), 73, 90);
+            AddProduct("157. ürün", GetRandomColor(), 77, 85);
+            AddProduct("346. ürün", GetRandomColor(), 92, 70);
+            AddProduct("467. ürün", GetRandomColor(), 69, 93);
+            AddProduct("381. ürün", GetRandomColor(), 66, 96);
+            AddProduct("218. ürün", GetRandomColor(), 93, 68);
+            AddProduct("78. ürün", GetRandomColor(), 91, 70);
+            AddProduct("192. ürün", GetRandomColor(), 88, 73);
+            AddProduct("135. ürün", GetRandomColor(), 82, 79);
+            AddProduct("297. ürün", GetRandomColor(), 79, 82);
+            AddProduct("358. ürün", GetRandomColor(), 76, 85);
+            AddProduct("334. ürün", GetRandomColor(), 72, 89);
+            AddProduct("391. ürün", GetRandomColor(), 69, 92);
+            AddProduct("407. ürün", GetRandomColor(), 99, 61);
+            AddProduct("411. ürün", GetRandomColor(), 96, 64);
+            AddProduct("464. ürün", GetRandomColor(), 87, 73);
+            AddProduct("148. ürün", GetRandomColor(), 66, 94);
+            AddProduct("388. ürün", GetRandomColor(), 65, 95);
+            AddProduct("175. ürün", GetRandomColor(), 63, 97);
+            AddProduct("333. ürün", GetRandomColor(), 99, 60);
+            AddProduct("413. ürün", GetRandomColor(), 88, 71);
+            AddProduct("109. ürün", GetRandomColor(), 87, 72);
+            AddProduct("211. ürün", GetRandomColor(), 65, 94);
+            AddProduct("129. ürün", GetRandomColor(), 97, 61);
+            AddProduct("219. ürün", GetRandomColor(), 96, 62);
+            AddProduct("114. ürün", GetRandomColor(), 91, 67);
+            AddProduct("206. ürün", GetRandomColor(), 85, 73);
+            AddProduct("153. ürün", GetRandomColor(), 83, 75);
+            AddProduct("98. ürün", GetRandomColor(), 72, 86);
+            AddProduct("283. ürün", GetRandomColor(), 62, 96);
+            AddProduct("303. ürün", GetRandomColor(), 91, 66);
+            AddProduct("276. ürün", GetRandomColor(), 88, 69);
+            AddProduct("169. ürün", GetRandomColor(), 86, 71);
+            AddProduct("224. ürün", GetRandomColor(), 84, 73);
+            AddProduct("437. ürün", GetRandomColor(), 80, 77);
+            AddProduct("447. ürün", GetRandomColor(), 77, 80);
+            AddProduct("304. ürün", GetRandomColor(), 69, 88);
+            AddProduct("385. ürün", GetRandomColor(), 64, 93);
+            AddProduct("474. ürün", GetRandomColor(), 58, 99);
+            AddProduct("311. ürün", GetRandomColor(), 94, 62);
+            AddProduct("305. ürün", GetRandomColor(), 87, 69);
+            AddProduct("461. ürün", GetRandomColor(), 85, 71);
+            AddProduct("70. ürün", GetRandomColor(), 83, 73);
+            AddProduct("227. ürün", GetRandomColor(), 78, 78);
+            AddProduct("12. ürün", GetRandomColor(), 67, 89);
+            AddProduct("11. ürün", GetRandomColor(), 66, 90);
+            AddProduct("156. ürün", GetRandomColor(), 79, 76);
+            AddProduct("180. ürün", GetRandomColor(), 94, 60);
+            AddProduct("187. ürün", GetRandomColor(), 71, 83);
+            AddProduct("228. ürün", GetRandomColor(), 63, 91);
+            AddProduct("216. ürün", GetRandomColor(), 62, 92);
+            AddProduct("352. ürün", GetRandomColor(), 93, 60);
+            AddProduct("174. ürün", GetRandomColor(), 75, 78);
+            AddProduct("423. ürün", GetRandomColor(), 86, 66);
+            AddProduct("463. ürün", GetRandomColor(), 99, 52);
+            AddProduct("245. ürün", GetRandomColor(), 88, 63);
+            AddProduct("37. ürün", GetRandomColor(), 87, 64);
+            AddProduct("131. ürün", GetRandomColor(), 73, 78);
+            AddProduct("466. ürün", GetRandomColor(), 72, 79);
+            AddProduct("38. ürün", GetRandomColor(), 95, 55);
+            AddProduct("196. ürün", GetRandomColor(), 71, 79);
+            AddProduct("320. ürün", GetRandomColor(), 52, 98);
+            AddProduct("240. ürün", GetRandomColor(), 87, 62);
+            AddProduct("48. ürün", GetRandomColor(), 82, 67);
+            AddProduct("243. ürün", GetRandomColor(), 67, 82);
+            AddProduct("353. ürün", GetRandomColor(), 51, 98);
+            AddProduct("165. ürün", GetRandomColor(), 93, 55);
+            AddProduct("307. ürün", GetRandomColor(), 70, 78);
+            AddProduct("448. ürün", GetRandomColor(), 68, 80);
+            AddProduct("83. ürün", GetRandomColor(), 52, 96);
+            AddProduct("13. ürün", GetRandomColor(), 81, 66);
+            AddProduct("95. ürün", GetRandomColor(), 64, 83);
+            AddProduct("69. ürün", GetRandomColor(), 58, 89);
+            AddProduct("249. ürün", GetRandomColor(), 55, 92);
+            AddProduct("144. ürün", GetRandomColor(), 50, 97);
+            AddProduct("368. ürün", GetRandomColor(), 98, 48);
+            AddProduct("484. ürün", GetRandomColor(), 69, 77);
+            AddProduct("459. ürün", GetRandomColor(), 92, 53);
+            AddProduct("267. ürün", GetRandomColor(), 81, 64);
+            AddProduct("125. ürün", GetRandomColor(), 79, 66);
+            AddProduct("323. ürün", GetRandomColor(), 66, 79);
+            AddProduct("159. ürün", GetRandomColor(), 48, 97);
+            AddProduct("133. ürün", GetRandomColor(), 95, 49);
+            AddProduct("146. ürün", GetRandomColor(), 89, 55);
+            AddProduct("302. ürün", GetRandomColor(), 77, 67);
+            AddProduct("289. ürün", GetRandomColor(), 76, 68);
+            AddProduct("74. ürün", GetRandomColor(), 74, 70);
+            AddProduct("404. ürün", GetRandomColor(), 67, 77);
+            AddProduct("481. ürün", GetRandomColor(), 63, 81);
+            AddProduct("56. ürün", GetRandomColor(), 84, 59);
+            AddProduct("149. ürün", GetRandomColor(), 80, 63);
+            AddProduct("154. ürün", GetRandomColor(), 77, 66);
+            AddProduct("138. ürün", GetRandomColor(), 74, 69);
+            AddProduct("264. ürün", GetRandomColor(), 53, 90);
+            AddProduct("387. ürün", GetRandomColor(), 65, 77);
+            AddProduct("105. ürün", GetRandomColor(), 62, 80);
+            AddProduct("306. ürün", GetRandomColor(), 62, 80);
+            AddProduct("161. ürün", GetRandomColor(), 59, 83);
+            AddProduct("118. ürün", GetRandomColor(), 58, 84);
+            AddProduct("103. ürün", GetRandomColor(), 78, 63);
+            AddProduct("273. ürün", GetRandomColor(), 80, 60);
+            AddProduct("453. ürün", GetRandomColor(), 66, 74);
+            AddProduct("275. ürün", GetRandomColor(), 56, 84);
+            AddProduct("288. ürün", GetRandomColor(), 47, 93);
+            AddProduct("101. ürün", GetRandomColor(), 43, 97);
+            AddProduct("128. ürün", GetRandomColor(), 53, 86);
+            AddProduct("287. ürün", GetRandomColor(), 44, 95);
+            AddProduct("194. ürün", GetRandomColor(), 99, 39);
+            AddProduct("210. ürün", GetRandomColor(), 89, 49);
+            AddProduct("253. ürün", GetRandomColor(), 76, 62);
+            AddProduct("16. ürün", GetRandomColor(), 65, 73);
+            AddProduct("277. ürün", GetRandomColor(), 57, 81);
+            AddProduct("450. ürün", GetRandomColor(), 77, 60);
+            AddProduct("271. ürün", GetRandomColor(), 51, 86);
+            AddProduct("373. ürün", GetRandomColor(), 46, 91);
+            AddProduct("237. ürün", GetRandomColor(), 45, 92);
+            AddProduct("470. ürün", GetRandomColor(), 89, 47);
+            AddProduct("372. ürün", GetRandomColor(), 74, 62);
+            AddProduct("280. ürün", GetRandomColor(), 59, 77);
+            AddProduct("150. ürün", GetRandomColor(), 45, 91);
+            AddProduct("419. ürün", GetRandomColor(), 42, 94);
+            AddProduct("217. ürün", GetRandomColor(), 98, 37);
+            AddProduct("415. ürün", GetRandomColor(), 92, 43);
+            AddProduct("482. ürün", GetRandomColor(), 64, 71);
+            AddProduct("53. ürün", GetRandomColor(), 63, 72);
+            AddProduct("290. ürün", GetRandomColor(), 58, 77);
+            AddProduct("498. ürün", GetRandomColor(), 48, 87);
+            AddProduct("235. ürün", GetRandomColor(), 38, 96);
+            AddProduct("18. ürün", GetRandomColor(), 66, 68);
+            AddProduct("151. ürün", GetRandomColor(), 53, 81);
+            AddProduct("469. ürün", GetRandomColor(), 42, 92);
+            AddProduct("441. ürün", GetRandomColor(), 72, 61);
+            AddProduct("429. ürün", GetRandomColor(), 59, 74);
+            AddProduct("215. ürün", GetRandomColor(), 46, 87);
+            AddProduct("367. ürün", GetRandomColor(), 36, 97);
+            AddProduct("170. ürün", GetRandomColor(), 95, 37);
+            AddProduct("96. ürün", GetRandomColor(), 86, 46);
+            AddProduct("427. ürün", GetRandomColor(), 78, 54);
+            AddProduct("412. ürün", GetRandomColor(), 66, 66);
+            AddProduct("354. ürün", GetRandomColor(), 63, 69);
+            AddProduct("327. ürün", GetRandomColor(), 53, 79);
+            AddProduct("424. ürün", GetRandomColor(), 45, 87);
+            AddProduct("420. ürün", GetRandomColor(), 40, 92);
+            AddProduct("239. ürün", GetRandomColor(), 39, 93);
+            AddProduct("90. ürün", GetRandomColor(), 33, 99);
+            AddProduct("52. ürün", GetRandomColor(), 99, 32);
+            AddProduct("34. ürün", GetRandomColor(), 94, 37);
+            AddProduct("337. ürün", GetRandomColor(), 83, 48);
+            AddProduct("376. ürün", GetRandomColor(), 59, 72);
+            AddProduct("355. ürün", GetRandomColor(), 40, 91);
+            AddProduct("45. ürün", GetRandomColor(), 35, 96);
+            AddProduct("120. ürün", GetRandomColor(), 33, 98);
+            AddProduct("444. ürün", GetRandomColor(), 70, 60);
+            AddProduct("292. ürün", GetRandomColor(), 52, 78);
+            AddProduct("31. ürün", GetRandomColor(), 49, 81);
+            AddProduct("141. ürün", GetRandomColor(), 98, 31);
+            AddProduct("147. ürün", GetRandomColor(), 69, 60);
+            AddProduct(" 9. ürün", GetRandomColor(), 74, 54);
+            AddProduct("221. ürün", GetRandomColor(), 56, 72);
+            AddProduct("162. ürün", GetRandomColor(), 47, 81);
+            AddProduct("315. ürün", GetRandomColor(), 35, 93);
+            AddProduct("485. ürün", GetRandomColor(), 35, 93);
+            AddProduct("274. ürün", GetRandomColor(), 30, 98);
+            AddProduct("299. ürün", GetRandomColor(), 97, 30);
+            AddProduct("321. ürün", GetRandomColor(), 91, 36);
+            AddProduct("393. ürün", GetRandomColor(), 69, 58);
+            AddProduct("310. ürün", GetRandomColor(), 55, 72);
+            AddProduct("33. ürün", GetRandomColor(), 46, 81);
+            AddProduct("186. ürün", GetRandomColor(), 44, 83);
+            AddProduct("155. ürün", GetRandomColor(), 33, 94);
+            AddProduct("421. ürün", GetRandomColor(), 33, 94);
+            AddProduct("62. ürün", GetRandomColor(), 28, 99);
+            AddProduct("347. ürün", GetRandomColor(), 89, 37);
+            AddProduct("200. ürün", GetRandomColor(), 76, 50);
+            AddProduct("401. ürün", GetRandomColor(), 71, 55);
+            AddProduct("375. ürün", GetRandomColor(), 45, 81);
+            AddProduct("47. ürün", GetRandomColor(), 44, 82);
+            AddProduct("261. ürün", GetRandomColor(), 88, 37);
+            AddProduct("478. ürün", GetRandomColor(), 75, 50);
+            AddProduct("198. ürün", GetRandomColor(), 48, 77);
+            AddProduct("167. ürün", GetRandomColor(), 86, 38);
+            AddProduct("24. ürün", GetRandomColor(), 84, 40);
+            AddProduct("395. ürün", GetRandomColor(), 73, 51);
+            AddProduct("122. ürün", GetRandomColor(), 55, 69);
+            AddProduct("63. ürün", GetRandomColor(), 35, 89);
+            AddProduct("406. ürün", GetRandomColor(), 33, 91);
+            AddProduct("330. ürün", GetRandomColor(), 29, 95);
+            AddProduct("374. ürün", GetRandomColor(), 29, 95);
+            AddProduct("179. ürün", GetRandomColor(), 86, 37);
+            AddProduct("223. ürün", GetRandomColor(), 46, 77);
+            AddProduct("182. ürün", GetRandomColor(), 45, 78);
+            AddProduct("295. ürün", GetRandomColor(), 84, 38);
+            AddProduct("291. ürün", GetRandomColor(), 76, 46);
+            AddProduct("61. ürün", GetRandomColor(), 71, 51);
+            AddProduct("10. ürün", GetRandomColor(), 70, 52);
+            AddProduct("85. ürün", GetRandomColor(), 70, 52);
+            AddProduct("472. ürün", GetRandomColor(), 70, 52);
+            AddProduct("370. ürün", GetRandomColor(), 62, 60);
+            AddProduct("60. ürün", GetRandomColor(), 50, 72);
+            AddProduct("188. ürün", GetRandomColor(), 42, 80);
+            AddProduct("435. ürün", GetRandomColor(), 33, 89);
+            AddProduct("137. ürün", GetRandomColor(), 90, 31);
+            AddProduct("496. ürün", GetRandomColor(), 64, 57);
+            AddProduct("392. ürün", GetRandomColor(), 59, 62);
+            AddProduct("446. ürün", GetRandomColor(), 59, 62);
+            AddProduct("256. ürün", GetRandomColor(), 52, 69);
+            AddProduct("242. ürün", GetRandomColor(), 45, 76);
+            AddProduct("479. ürün", GetRandomColor(), 41, 80);
+            AddProduct("379. ürün", GetRandomColor(), 33, 88);
+            AddProduct("361. ürün", GetRandomColor(), 88, 32);
+            AddProduct("247. ürün", GetRandomColor(), 73, 47);
+            AddProduct("189. ürün", GetRandomColor(), 68, 52);
+            AddProduct("197. ürün", GetRandomColor(), 66, 54);
+            AddProduct("88. ürün", GetRandomColor(), 52, 68);
+            AddProduct("293. ürün", GetRandomColor(), 49, 71);
+            AddProduct("422. ürün", GetRandomColor(), 37, 83);
+            AddProduct("49. ürün", GetRandomColor(), 34, 86);
+            AddProduct("362. ürün", GetRandomColor(), 94, 25);
+            AddProduct("414. ürün", GetRandomColor(), 75, 44);
+            AddProduct("434. ürün", GetRandomColor(), 75, 44);
+            AddProduct("236. ürün", GetRandomColor(), 68, 51);
+            AddProduct("428. ürün", GetRandomColor(), 68, 51);
+            AddProduct("91. ürün", GetRandomColor(), 60, 59);
+            AddProduct("366. ürün", GetRandomColor(), 59, 60);
+            AddProduct("99. ürün", GetRandomColor(), 57, 62);
+            AddProduct("394. ürün", GetRandomColor(), 37, 82);
+            AddProduct("350. ürün", GetRandomColor(), 31, 88);
+            AddProduct("296. ürün", GetRandomColor(), 30, 89);
+            AddProduct("226. ürün", GetRandomColor(), 29, 90);
+            AddProduct("342. ürün", GetRandomColor(), 85, 33);
+            AddProduct("378. ürün", GetRandomColor(), 78, 40);
+            AddProduct("79. ürün", GetRandomColor(), 70, 48);
+            AddProduct("338. ürün", GetRandomColor(), 70, 48);
+            AddProduct("110. ürün", GetRandomColor(), 62, 56);
+            AddProduct("139. ürün", GetRandomColor(), 44, 74);
+            AddProduct("66. ürün", GetRandomColor(), 33, 85);
+            AddProduct("145. ürün", GetRandomColor(), 28, 90);
+            AddProduct("405. ürün", GetRandomColor(), 65, 52);
+            AddProduct("42. ürün", GetRandomColor(), 59, 58);
+            AddProduct("317. ürün", GetRandomColor(), 50, 67);
+            AddProduct("126. ürün", GetRandomColor(), 42, 75);
+            AddProduct("493. ürün", GetRandomColor(), 41, 76);
+            AddProduct("130. ürün", GetRandomColor(), 66, 50);
+            AddProduct("25. ürün", GetRandomColor(), 49, 67);
+            AddProduct("40. ürün", GetRandomColor(), 46, 70);
+            AddProduct("77. ürün", GetRandomColor(), 40, 76);
+            AddProduct("19. ürün", GetRandomColor(), 37, 79);
+            AddProduct("449. ürün", GetRandomColor(), 87, 28);
+            AddProduct("81. ürün", GetRandomColor(), 30, 85);
+            AddProduct("278. ürün", GetRandomColor(), 83, 32);
+            AddProduct("343. ürün", GetRandomColor(), 77, 38);
+            AddProduct("265. ürün", GetRandomColor(), 69, 46);
+            AddProduct("225. ürün", GetRandomColor(), 66, 49);
+            AddProduct("488. ürün", GetRandomColor(), 49, 66);
+            AddProduct("93. ürün", GetRandomColor(), 40, 75);
+            AddProduct("39. ürün", GetRandomColor(), 29, 86);
+            AddProduct("396. ürün", GetRandomColor(), 76, 38);
+            AddProduct("409. ürün", GetRandomColor(), 61, 53);
+            AddProduct("408. ürün", GetRandomColor(), 54, 60);
+            AddProduct("341. ürün", GetRandomColor(), 38, 76);
+            AddProduct("190. ürün", GetRandomColor(), 36, 78);
+            AddProduct("286. ürün", GetRandomColor(), 38, 75);
+            AddProduct("58. ürün", GetRandomColor(), 26, 87);
+            AddProduct("55. ürün", GetRandomColor(), 82, 30);
+            AddProduct("377. ürün", GetRandomColor(), 65, 47);
+            AddProduct("87. ürün", GetRandomColor(), 57, 55);
+            AddProduct("112. ürün", GetRandomColor(), 56, 56);
+            AddProduct("456. ürün", GetRandomColor(), 54, 58);
+            AddProduct("113. ürün", GetRandomColor(), 25, 87);
+            AddProduct("282. ürün", GetRandomColor(), 85, 26);
+            AddProduct("331. ürün", GetRandomColor(), 72, 39);
+            AddProduct("72. ürün", GetRandomColor(), 69, 42);
+            AddProduct("116. ürün", GetRandomColor(), 62, 49);
+            AddProduct("89. ürün", GetRandomColor(), 56, 55);
+            AddProduct("325. ürün", GetRandomColor(), 56, 55);
+            AddProduct("23. ürün", GetRandomColor(), 52, 59);
+            AddProduct("204. ürün", GetRandomColor(), 45, 66);
+            AddProduct("195. ürün", GetRandomColor(), 80, 31);
+            AddProduct("232. ürün", GetRandomColor(), 84, 26);
+            AddProduct("272. ürün", GetRandomColor(), 73, 37);
+            AddProduct("80. ürün", GetRandomColor(), 44, 66);
+            AddProduct("54. ürün", GetRandomColor(), 41, 69);
+            AddProduct("440. ürün", GetRandomColor(), 32, 78);
+            AddProduct("452. ürün", GetRandomColor(), 28, 82);
+            AddProduct("73. ürün", GetRandomColor(), 79, 30);
+            AddProduct("344. ürün", GetRandomColor(), 78, 31);
+            AddProduct("59. ürün", GetRandomColor(), 48, 61);
+            AddProduct("71. ürün", GetRandomColor(), 46, 62);
+            AddProduct(" 8. ürün", GetRandomColor(), 28, 80);
+            AddProduct("68. ürün", GetRandomColor(), 28, 80);
+            AddProduct("451. ürün", GetRandomColor(), 64, 43);
+            AddProduct("294. ürün", GetRandomColor(), 57, 50);
+            AddProduct("168. ürün", GetRandomColor(), 46, 61);
+            AddProduct("383. ürün", GetRandomColor(), 76, 30);
+            AddProduct("430. ürün", GetRandomColor(), 49, 57);
+            AddProduct("438. ürün", GetRandomColor(), 44, 62);
+            AddProduct("173. ürün", GetRandomColor(), 57, 48);
+            AddProduct("468. ürün", GetRandomColor(), 54, 51);
+            AddProduct("171. ürün", GetRandomColor(), 26, 79);
+            AddProduct("166. ürün", GetRandomColor(), 25, 80);
+            AddProduct("416. ürün", GetRandomColor(), 74, 30);
+            AddProduct("107. ürün", GetRandomColor(), 70, 34);
+            AddProduct("134. ürün", GetRandomColor(), 60, 44);
+            AddProduct("489. ürün", GetRandomColor(), 53, 51);
+            AddProduct("432. ürün", GetRandomColor(), 78, 25);
+            AddProduct("348. ürün", GetRandomColor(), 76, 27);
+            AddProduct("117. ürün", GetRandomColor(), 34, 69);
+            AddProduct("100. ürün", GetRandomColor(), 54, 48);
+            AddProduct("152. ürün", GetRandomColor(), 35, 67);
+            AddProduct("22. ürün", GetRandomColor(), 32, 70);
+            AddProduct("313. ürün", GetRandomColor(), 31, 71);
+            AddProduct("400. ürün", GetRandomColor(), 29, 73);
+            AddProduct("250. ürün", GetRandomColor(), 69, 32);
+            AddProduct("46. ürün", GetRandomColor(), 28, 73);
+            AddProduct("213. ürün", GetRandomColor(), 25, 76);
+            AddProduct("309. ürün", GetRandomColor(), 69, 31);
+            AddProduct("364. ürün", GetRandomColor(), 56, 44);
+            AddProduct("111. ürün", GetRandomColor(), 55, 45);
+            AddProduct("263. ürün", GetRandomColor(), 53, 47);
+            AddProduct("270. ürün", GetRandomColor(), 51, 49);
+            AddProduct("132. ürün", GetRandomColor(), 49, 51);
+            AddProduct("30. ürün", GetRandomColor(), 46, 54);
+            AddProduct("203. ürün", GetRandomColor(), 38, 62);
+            AddProduct("208. ürün", GetRandomColor(), 37, 63);
+            AddProduct("318. ürün", GetRandomColor(), 37, 63);
+            AddProduct("184. ürün", GetRandomColor(), 33, 67);
+            AddProduct("75. ürün", GetRandomColor(), 62, 37);
+            AddProduct("390. ürün", GetRandomColor(), 46, 53);
+            AddProduct("324. ürün", GetRandomColor(), 43, 56);
+            AddProduct("158. ürün", GetRandomColor(), 62, 36);
+            AddProduct("214. ürün", GetRandomColor(), 57, 41);
+            AddProduct("127. ürün", GetRandomColor(), 50, 48);
+            AddProduct("284. ürün", GetRandomColor(), 43, 55);
+            AddProduct("454. ürün", GetRandomColor(), 42, 56);
+            AddProduct("426. ürün", GetRandomColor(), 41, 57);
+            AddProduct("398. ürün", GetRandomColor(), 40, 58);
+            AddProduct("357. ürün", GetRandomColor(), 33, 65);
+            AddProduct("35. ürün", GetRandomColor(), 31, 67);
+            AddProduct("492. ürün", GetRandomColor(), 36, 61);
+            AddProduct("212. ürün", GetRandomColor(), 32, 65);
+            AddProduct("119. ürün", GetRandomColor(), 31, 66);
+            AddProduct("431. ürün", GetRandomColor(), 31, 65);
+            AddProduct("176. ürün", GetRandomColor(), 28, 68);
+            AddProduct("172. ürün", GetRandomColor(), 65, 30);
+            AddProduct("476. ürün", GetRandomColor(), 65, 30);
+            AddProduct("460. ürün", GetRandomColor(), 51, 44);
+            AddProduct("254. ürün", GetRandomColor(), 26, 69);
+            AddProduct("402. ürün", GetRandomColor(), 26, 69);
+            AddProduct("443. ürün", GetRandomColor(), 63, 31);
+            AddProduct("163. ürün", GetRandomColor(), 61, 33);
+            AddProduct("262. ürün", GetRandomColor(), 61, 33);
+            AddProduct("465. ürün", GetRandomColor(), 46, 48);
+            AddProduct("21. ürün", GetRandomColor(), 28, 66);
+            AddProduct("316. ürün", GetRandomColor(), 41, 52);
+            AddProduct("389. ürün", GetRandomColor(), 38, 55);
+            AddProduct("108. ürün", GetRandomColor(), 37, 56);
+            AddProduct("86. ürün", GetRandomColor(), 27, 66);
+            AddProduct("246. ürün", GetRandomColor(), 27, 66);
+            AddProduct("326. ürün", GetRandomColor(), 67, 25);
+            AddProduct("339. ürün", GetRandomColor(), 45, 47);
+            AddProduct("142. ürün", GetRandomColor(), 43, 49);
+            AddProduct("181. ürün", GetRandomColor(), 26, 66);
+            AddProduct("365. ürün", GetRandomColor(), 40, 51);
+            AddProduct("439. ürün", GetRandomColor(), 26, 65);
+            AddProduct("64. ürün", GetRandomColor(), 64, 26);
+            AddProduct("371. ürün", GetRandomColor(), 57, 33);
+            AddProduct("26. ürün", GetRandomColor(), 50, 40);
+            AddProduct("191. ürün", GetRandomColor(), 27, 63);
+            AddProduct("20. ürün", GetRandomColor(), 25, 64);
+            AddProduct("399. ürün", GetRandomColor(), 62, 26);
+            AddProduct("363. ürün", GetRandomColor(), 59, 29);
+            AddProduct("257. ürün", GetRandomColor(), 37, 51);
+            AddProduct("268. ürün", GetRandomColor(), 31, 57);
+            AddProduct("44. ürün", GetRandomColor(), 29, 59);
+            AddProduct("300. ürün", GetRandomColor(), 54, 33);
+            AddProduct("417. ürün", GetRandomColor(), 53, 34);
+            AddProduct("177. ürün", GetRandomColor(), 39, 48);
+            AddProduct("314. ürün", GetRandomColor(), 39, 48);
+            AddProduct("84. ürün", GetRandomColor(), 56, 30);
+            AddProduct("403. ürün", GetRandomColor(), 56, 30);
+            AddProduct("230. ürün", GetRandomColor(), 51, 35);
+            AddProduct("193. ürün", GetRandomColor(), 42, 44);
+            AddProduct("252. ürün", GetRandomColor(), 41, 45);
+            AddProduct("442. ürün", GetRandomColor(), 39, 47);
+            AddProduct("244. ürün", GetRandomColor(), 48, 37);
+            AddProduct("51. ürün", GetRandomColor(), 26, 59);
+            AddProduct("67. ürün", GetRandomColor(), 58, 26);
+            AddProduct("50. ürün", GetRandomColor(), 54, 30);
+            AddProduct("32. ürün", GetRandomColor(), 49, 35);
+            AddProduct("143. ürün", GetRandomColor(), 40, 44);
+            AddProduct("14. ürün", GetRandomColor(), 38, 46);
+            AddProduct("251. ürün", GetRandomColor(), 29, 54);
+            AddProduct("495. ürün", GetRandomColor(), 46, 36);
+            AddProduct("384. ürün", GetRandomColor(), 38, 44);
+            AddProduct(" 5. ürün", GetRandomColor(), 26, 56);
+            AddProduct("43. ürün", GetRandomColor(), 25, 57);
+            AddProduct("359. ürün", GetRandomColor(), 56, 25);
+            AddProduct("234. ürün", GetRandomColor(), 40, 41);
+            AddProduct("183. ürün", GetRandomColor(), 28, 53);
+            AddProduct("335. ürün", GetRandomColor(), 36, 44);
+            AddProduct("500. ürün", GetRandomColor(), 36, 44);
+            AddProduct("336. ürün", GetRandomColor(), 31, 49);
+            AddProduct("494. ürün", GetRandomColor(), 28, 52);
+            AddProduct("458. ürün", GetRandomColor(), 26, 54);
+            AddProduct("281. ürün", GetRandomColor(), 52, 27);
+            AddProduct("222. ürün", GetRandomColor(), 53, 25);
+            AddProduct("301. ürün", GetRandomColor(), 49, 29);
+            AddProduct("258. ürün", GetRandomColor(), 39, 39);
+            AddProduct(" 3. ürün", GetRandomColor(), 37, 41);
+            AddProduct("475. ürün", GetRandomColor(), 37, 41);
+            AddProduct("312. ürün", GetRandomColor(), 32, 46);
+            AddProduct("123. ürün", GetRandomColor(), 30, 48);
+            AddProduct("486. ürün", GetRandomColor(), 42, 35);
+            AddProduct("490. ürün", GetRandomColor(), 41, 36);
+            AddProduct("499. ürün", GetRandomColor(), 38, 39);
+            AddProduct("319. ürün", GetRandomColor(), 27, 50);
+            AddProduct("491. ürün", GetRandomColor(), 49, 27);
+            AddProduct("457. ürün", GetRandomColor(), 46, 30);
+            AddProduct("471. ürün", GetRandomColor(), 48, 27);
+            AddProduct("209. ürün", GetRandomColor(), 40, 35);
+            AddProduct("386. ürün", GetRandomColor(), 46, 28);
+            AddProduct("425. ürün", GetRandomColor(), 42, 32);
+            AddProduct("238. ürün", GetRandomColor(), 41, 33);
+            AddProduct("349. ürün", GetRandomColor(), 43, 30);
+            AddProduct("455. ürün", GetRandomColor(), 41, 32);
+            AddProduct("76. ürün", GetRandomColor(), 27, 46);
+            AddProduct("121. ürün", GetRandomColor(), 41, 31);
+            AddProduct("231. ürün", GetRandomColor(), 33, 38);
+            AddProduct("298. ürün", GetRandomColor(), 32, 39);
+            AddProduct("462. ürün", GetRandomColor(), 30, 41);
+            AddProduct("332. ürün", GetRandomColor(), 36, 34);
+            AddProduct(" 4. ürün", GetRandomColor(), 36, 33);
+            AddProduct("266. ürün", GetRandomColor(), 35, 34);
+            AddProduct("36. ürün", GetRandomColor(), 42, 26);
+            AddProduct(" 2. ürün", GetRandomColor(), 39, 29);
+            AddProduct("418. ürün", GetRandomColor(), 30, 36);
+            AddProduct("140. ürün", GetRandomColor(), 33, 32);
+            AddProduct("356. ürün", GetRandomColor(), 31, 33);
+            AddProduct("57. ürün", GetRandomColor(), 26, 38);
+            AddProduct("27. ürün", GetRandomColor(), 29, 34);
+            AddProduct("445. ürün", GetRandomColor(), 28, 35);
+            AddProduct("185. ürün", GetRandomColor(), 27, 36);
+            AddProduct("369. ürün", GetRandomColor(), 26, 36);
+            AddProduct("248. ürün", GetRandomColor(), 31, 30);
+            AddProduct("41. ürün", GetRandomColor(), 30, 29);
+            AddProduct("202. ürün", GetRandomColor(), 30, 28);
+            AddProduct("328. ürün", GetRandomColor(), 29, 29);
+            AddProduct("473. ürün", GetRandomColor(), 27, 26);
+        }
+
+        public string GetPlaceFormat(int area)
+        {
+            var x = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = ",",
+                NumberGroupSeparator = "."
+            };
+            return Convert.ToDouble(area).ToString("#,##0", x);
+        }
+
+        private void DoPlace_Click(object sender, EventArgs e)
+        {
+            PRODUCT_COUNT = Convert.ToInt32(productCount.Text);
+  
+            dataGridView_productList.Rows.Clear();
+            productList.Clear();
+
+            for (int i = 1; i <= PRODUCT_COUNT; i++)
+                AddProduct(i + ". ürün", GetRandomColor(), 0, 0);
+
+            var startTime = DateTime.Now;
+
+            productList = productList.OrderByDescending(p => p.GetPerimeter()).ThenByDescending(p => p.GetPerimeter()).ThenByDescending(p => p.size.w).ToList();
+
+            CCanvas canvas = new CCanvas(PLACE_WIDTH, PLACE_HEIGHT);
+            canvas.PlaceProducts(productList);
+
+            label_DiffTime.Text = (DateTime.Now - startTime).Seconds.ToString() + " sn.";
+            label_totalArea.Text = GetPlaceFormat(canvas.GetCurrentCanvasArea());
+
+            int counter = 1;
+            foreach (var p in canvas.placedProducts)
+            {
+                var row = new String[8];
+
+                row[0] = (counter++).ToString();
+                row[1] = p.name;
+                row[2] = p.size.w.ToString();
+                row[3] = p.size.h.ToString();
+                row[4] = p.coord.x.ToString();
+                row[5] = p.coord.y.ToString();
+                row[6] = p.rotated.ToString();
+                row[7] = (p.coord.x).ToString() + "," + (p.coord.y).ToString();
+
+                dataGridView_productList.Rows.Add(Convert.ToInt32(row[0]), row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), Convert.ToInt32(row[5]), row[6], row[7]);
+            }
+
+            pictureBox1.Image = canvas.ToImage();
+        }
+    }
+}
